@@ -2,35 +2,37 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-/* Maximum name size + 1. */
-#define MAX_NAME_SZ 256
 
 int main(int argC, char *argV[]) {
-    /* Allocate memory and check if okay. */
+    // Initialize variables.
+    // 'char *name = malloc(64)' = Allocating memory (64bits) to the array
     char *name = malloc (64);
     char i, j, k;
     int n;
-    if (name == NULL) {
-        printf ("No memory\n");
-        return 1;
-    }
 
-    /* Ask user for name. */
+    // Prompt the user for thier name
     printf("What is your name? ");
 
-    /* Get the name, with size limit. */
+    // Store the name in the 'char *name' variable using 'fgets' (max '64')
+    // 'stdin' = standard input (Keyboard)
     fgets (name, 64, stdin);
 
+    // Using a for loop and 'strlen' (string length) of 'name' - to iterate
+    // through the charaters.
     for (i = 0, n = strlen(name); i < n; i++) {
-      char *firstInit = malloc(8);
+      // Using an if statement to checked if 'i' is the first point in the
+      // array[0] thus the first letter. 'toupper' changes the case.
       if (i == 0) {
-        printf("%c\n", name[i]);
+        printf("%c", toupper(name[i]));
+          // Using an else if and 'isspace' to check if 'i' is a space, then
+          // printf to output 'i+1' which is the start of the next word.
       }   else if (isspace(name[i])) {
-            printf("%c\n", name[i+1]);
+            printf("%c", toupper(name[i+1]));
       }
     }
 
-    /* Free memory and exit. */
+    // New line free malloc memory and quit
+    printf("\n");
     free (name);
     return 0;
 }
