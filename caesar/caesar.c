@@ -32,8 +32,20 @@ int main(int argc, char *argv[]) {
   printf("What would you like to encrypt?\n");
   fgets(phrase, 256, stdin);
 
+  // For loop to iterate the array. If isspace to input a space if one was
+  // originally there. else if checks if its upper case and cycles the keys along
+  // ASCII if not upper then it goes to lower case algorithm
   for (i = 0, n = strlen(phrase); i < n; i++) {
-    printf("%c", phrase[i]+key);
+    if (isspace(phrase[i])) {
+      printf(" ");
+    } else if (isupper(phrase[i])) {
+      char c = (((int)phrase[i] - 65 + key ) % 26 ) + 65;
+      printf("%c", c);
+    }
+    else {
+      char c = (((int)phrase[i] - 97 + key ) % 26 ) + 97;
+      printf("%c", c);
+    }
   }
-
+  printf("\n");
 }
