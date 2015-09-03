@@ -1,0 +1,7 @@
+printf("%c", keyword[2]);
+int mapped = keyword[i];
+  for (i = 0, k = strlen(message); i < k; i++) {
+    cipher[i] = (((int)message[i] - 65 + mapped ) % 26 ) + 65;
+  //    printf("%c", cipher[i]);
+  //    printf("%d\n", mapped);
+  }
