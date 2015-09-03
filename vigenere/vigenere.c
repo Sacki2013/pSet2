@@ -7,7 +7,7 @@
 int main(int argc, char * keyword[])
 {
 
-  int cipher[24], i, n;
+  int cipher[24], cipherLower[24], i, n;
   bool passed = false;
   char * message = malloc(256);
 
@@ -17,26 +17,30 @@ int main(int argc, char * keyword[])
       return 1;
     }
     else {
-      // cipher[i] is the ACII code of each number.
       for (i = 0, n = strlen(keyword[1]); i < n; i++) {
-        cipher[i] = keyword[1][i];
-        printf("%i\n", cipher[i]);
+        if (isupper(keyword[1][i])) {
+          cipher[i] = keyword[1][i] - 65;
+        }
+        else {
+          cipherLower[i] = keyword[1][i] - 97;
+        }
       }
       passed = true;
     }
   } while(!passed);
 
-  // Prompt the user for a message to encrypt
   printf("Enter your secret message\n");
   fgets(message, 256, stdin);
 
-  // Iterate the message
   for (i = 0, n = strlen(message); i < n - 1; i++) {
-    printf("%c\n", message[i] + cipher[i]);
-
+    if (isupper(message[i])) {
+      char c = (((int)message[i] - 65 + cipher[i] ) % 26 ) + 65;
+      printf("%c", c);
+    }
+    else {
+      char c = (((int)message[i] - 97 + cipherLower[i] ) % 26 ) + 97;
+      printf("%c", c);
+    }
   }
-
-
-
-
+  printf("\n" );
 }
